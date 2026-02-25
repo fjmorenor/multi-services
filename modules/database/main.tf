@@ -10,7 +10,7 @@ settings {
 
 ip_configuration {
   ipv4_enabled = false
-  private_network ="private_network_name"
+  private_network =google_sql_database_instance.name
 }
 }
 
