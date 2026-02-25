@@ -43,8 +43,7 @@ variable "repository_id" {
 
 
 
-variable "pubsub_topic_id" {
-}
+
 
 
 variable "google_pubsub_topic_name" {
