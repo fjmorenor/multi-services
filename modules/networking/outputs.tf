@@ -22,3 +22,7 @@ output "services_ip_cidr_range" {
   value = google_compute_subnetwork.subnet.secondary_ip_range[1].ip_cidr_range
 }
   
+output "vpc_id" {
+  # IMPORTANTE: Usar .id, no .name
+  value = google_compute_network.vpc.id 
+}

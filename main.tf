@@ -23,6 +23,7 @@ module "kubernetes" {
     network_name = var.network_name
     subnet_name = var.subnet_name
     endpoint = var.endpoint
+    
 
   
 }
