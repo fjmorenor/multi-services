@@ -50,8 +50,6 @@ variable "pubsub_topic_id" {
 variable "google_pubsub_topic_name" {
 }
 
-variable "google_pubsub_subscription" {
-}
 
 variable "cluster_name" {
 }
