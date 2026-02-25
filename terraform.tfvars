@@ -23,4 +23,4 @@ db_multiservicio = "temporary"
 pubsub_topic_id = "temporary"
 google_pubsub_topic_name = "temporary"
 google_pubsub_subscription = "temporary"
-vpc_id = "temporary"
+
