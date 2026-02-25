@@ -16,11 +16,10 @@ repository_id = "repo-multiservicios"
 cluster_name = "cluster-multiservicios"
 
 #database
-endpoint = "temporary"
-db_connection_name = "temporary"
+
+
 db_instance_name = "temporary"
 db_multiservicio = "temporary"
-pubsub_topic_id = "temporary"
-google_pubsub_topic_name = "temporary"
-google_pubsub_subscription = "temporary"
+
+
 
