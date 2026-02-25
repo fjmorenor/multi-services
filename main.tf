@@ -33,5 +33,6 @@ module "database" {
     region = var.region
     db_multiservicio = var.db_multiservicio
     db_instance_name = var.db_instance_name
+    vpc_id = var.vpc_id
       
 }
