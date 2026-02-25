@@ -12,7 +12,7 @@ variable "network_name" {
 }
 
 variable "subnet_name" {
-    type = strin
+    type = string
 }
 
 variable "ip_cidr_range" {
