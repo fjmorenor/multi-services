@@ -27,7 +27,7 @@ resource "google_sql_database" "database" {
 resource "google_pubsub_topic" "topic" {
     name = var.db_multiservicio
     project = var.project_id
-    privatevpc = var.vpc_id
+    
 }
 
 resource "google_pubsub_subscription" "subscription" {
