@@ -22,7 +22,6 @@ module "kubernetes" {
     cluster_name = var.cluster_name
     network_name = var.network_name
     subnet_name = var.subnet_name
-    endpoint = var.endpoint
     
 
   

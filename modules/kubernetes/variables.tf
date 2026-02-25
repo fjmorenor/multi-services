@@ -29,6 +29,3 @@ variable "repository_id" {
     type = string
 }
 
-variable "endpoint" {
-    type = string
-}
