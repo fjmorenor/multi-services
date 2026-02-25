@@ -43,8 +43,7 @@ variable "repository_id" {
 variable "endpoint" {
 }
 
-variable "db_connection_name" {
-}
+
 
 variable "pubsub_topic_id" {
 }

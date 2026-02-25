@@ -15,11 +15,12 @@ services_ip_cidr_range = "10.2.0.0/24"
 repository_id = "repo-multiservicios"
 cluster_name = "cluster-multiservicios"
 
-#database
 
 
-db_instance_name = "temporary"
-db_multiservicio = "temporary"
+
+# database
+db_instance_name = "db-instancia-multiservicio"
+db_multiservicio = "db-app-principal"
 
 
 
