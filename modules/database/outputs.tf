@@ -1,5 +1,5 @@
 output "db_connection_name" {
-  value = google_sql_database_instance.db_instance.db_connection_name
+  value = google_sql_database_instance.db-instance.db_connection_name
 }
 
 output "db_multiservicio" {
