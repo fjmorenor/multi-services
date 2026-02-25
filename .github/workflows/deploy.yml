@@ -1,0 +1,25 @@
+name: Deploy App to Artifact Registry
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    env:
+      GCP_PROJECT: multi-services-488417 # Asegúrate de que este sea tu ID de proyecto
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Build and Push Container
+        run: |-
+          gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
+          docker build -t europe-west1-docker.pkg.dev/${{ env.GCP_PROJECT }}/repo-multiservicios/mi-app:v1 ./app
+          docker push europe-west1-docker.pkg.dev/${{ env.GCP_PROJECT }}/repo-multiservicios/mi-app:v1
