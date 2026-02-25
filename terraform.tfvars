@@ -13,6 +13,7 @@ services_ip_cidr_range = "10.2.0.0/24"
 
 #kubernetes
 repository_id = "repo-multiservicios"
+cluster_name = var.cluster_name
 
 #database
 endpoint = "temporary"
