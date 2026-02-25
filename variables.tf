@@ -41,15 +41,6 @@ variable "repository_id" {
 }
 
 
-
-
-
-
-
-variable "google_pubsub_topic_name" {
-}
-
-
 variable "cluster_name" {
 }
 
