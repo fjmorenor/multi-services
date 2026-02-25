@@ -10,7 +10,7 @@ settings {
 
 ip_configuration {
   ipv4_enabled = false
-  private_network = var.vpc_name.id
+  private_network ="private_network_name"
 }
 }
 
@@ -31,7 +31,7 @@ resource "google_pubsub_topic" "topic" {
 }
 
 resource "google_pubsub_subscription" "subscription" {
-    name = multiservicio-subscription
+    name = "multiservicio-subscription"
     topic = google_pubsub_topic.topic.name
     project = var.project_id
 
