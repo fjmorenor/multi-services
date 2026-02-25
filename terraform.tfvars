@@ -18,6 +18,7 @@ cluster_name = var.cluster_name
 #database
 endpoint = "temporary"
 db_connection_name = "temporary"
+db_instance_name = var.db_instance_name
 pubsub_topic_id = "temporary"
 google_pubsub_topic_name = "temporary"
 google_pubsub_subscription = "temporary"
