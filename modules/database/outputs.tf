@@ -1,5 +1,5 @@
 output "db_connection_name" {
-  value = google_sql_database_instance.db_instance
+  value = google_sql_database_instance.db_instance.db_connection_name
 }
 
 output "db_multiservicio" {
@@ -20,7 +20,3 @@ output "google_pubsub_subscription_name" {
     value = google_pubsub_subscription.subscription.name
 }
 
-output "vpc_id" {
-  value       = google_compute_network.vpc.id
-  description = "El ID de la red VPC para que otros módulos lo usen"
-}

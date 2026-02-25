@@ -16,7 +16,7 @@ resource "google_artifact_registry_repository" "repo" {
 
 resource "google_artifact_registry_repository_iam_member" "viewer" {
     project = var.project_id
-    repository = var.repository_id
+    repository = google_artifact_registry_repository.repo.name
     location = var.region
     role = "roles/artifactregistry.reader"
     member = "serviceAccount:${var.project_id}.svc.id.goog[default/default]"
