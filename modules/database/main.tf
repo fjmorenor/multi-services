@@ -10,7 +10,7 @@ settings {
 
 ip_configuration {
   ipv4_enabled = false
-  private_network =google_sql_database_instance.name
+  private_network =var.vpc_id
 }
 }
 
