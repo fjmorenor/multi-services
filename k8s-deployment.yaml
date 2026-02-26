@@ -26,7 +26,7 @@ spec:
         - name: DB_USER
           value: "postgres" # Usuario estándar de Postgres
         - name: DB_PASSWORD
-          value: "TU_CONTRASEÑA_REAL" # Pon la contraseña que cambiaste en la consola
+          value: "MiPassword123!" # Pon la contraseña que cambiaste en la consola
         - name: DB_NAME
           value: "db-app-principal"
         volumeMounts:

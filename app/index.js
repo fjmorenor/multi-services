@@ -15,7 +15,7 @@ const topicName = 'projects/multi-services-488417/topics/topic-eventos-app';
 const db = new Client({
     host: process.env.DB_HOST || '127.0.0.1',
     user: process.env.DB_USER || 'postgres',
-    password: process.env.DB_PASSWORD || 'TU_CONTRASEÑA_REAL', // Asegúrate de que coincida con la que pusiste en la consola
+    password: process.env.DB_PASSWORD || 'MiPassword123!', // Asegúrate de que coincida con la que pusiste en la consola
     database: process.env.DB_NAME || 'db-app-principal',
     port: 5432
 });
