@@ -30,4 +30,4 @@ spec:
   ports:
     - protocol: TCP
       port: 80 # Puerto externo
-      targetPort: 3000 # Puerto interno de la app
+      targetPort: 8080 # Puerto interno de la app
