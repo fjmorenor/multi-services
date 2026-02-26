@@ -15,7 +15,7 @@ spec:
       containers:
       - name: node-app
         # CAMBIO 1: Pon v1 (que es la que existe en tu consola)
-        image: europe-west1-docker.pkg.dev/multi-services-488417/repo-multiservicios/mi-app:v2
+        image: europe-west1-docker.pkg.dev/multi-services-488417/repo-multiservicios/mi-app:v3
         # CAMBIO 2: Baja los recursos para que quepa en el nodo (Insufficient memory)
         resources:
           requests:
