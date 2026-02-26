@@ -1,0 +1,21 @@
+# --- Google Cloud & Credentials ---
+*.json
+!app/package.json
+# (La línea de arriba permite el package.json pero bloquea cualquier otro JSON de credenciales)
+
+# --- Terraform ---
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+# (Bloqueamos .tfvars porque ahí suelen estar tus IDs y datos sensibles)
+.terraform.lock.hcl
+
+# --- Docker & App ---
+node_modules/
+npm-debug.log*
+.env
+
+# --- OS Files ---
+.DS_Store
+Thumbs.db
