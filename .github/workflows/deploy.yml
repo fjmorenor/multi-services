@@ -1,25 +1,50 @@
-name: Deploy App to Artifact Registry
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  build-and-push:
-    runs-on: ubuntu-latest
-    env:
-      GCP_PROJECT: multi-services-488417 # Asegúrate de que este sea tu ID de proyecto
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
-
-      - name: Build and Push Container
-        run: |-
-          gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
-          docker build -t europe-west1-docker.pkg.dev/multi-services-488417/repo-multiservicios/mi-app:v1 ./app
-          docker push europe-west1-docker.pkg.dev/multi-services-488417/repo-multiservicios/mi-app:v1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mi-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mi-app
+  template:
+    metadata:
+      labels:
+        app: mi-app
+    spec:
+      containers:
+      - name: node-app
+        # CAMBIO 1: Pon v1 (que es la que existe en tu consola)
+        image: europe-west1-docker.pkg.dev/multi-services-488417/repo-multiservicios/mi-app:v2
+        # CAMBIO 2: Baja los recursos para que quepa en el nodo (Insufficient memory)
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+        ports:
+        - containerPort: 8080 # Tu index.js usa el 8080
+        env:
+        - name: DB_HOST
+          value: "10.4.0.3"
+        - name: DB_USER
+          value: "root"
+        - name: DB_PASSWORD
+          value: "tu-password-seguro"
+        - name: DB_NAME
+          value: "db-app-principal"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mi-app-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: mi-app
+  ports:
+    - protocol: TCP
+      port: 80
+      # CAMBIO 3: targetPort debe ser 8080 (donde escucha Node)
+      targetPort: 8080

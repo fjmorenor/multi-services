@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: mi-app-deployment
 spec:
-  replicas: 2 # Número de copias de tu app corriendo
+  replicas: 2
   selector:
     matchLabels:
       app: mi-app
@@ -14,36 +14,34 @@ spec:
     spec:
       containers:
       - name: node-app
-
         image: europe-west1-docker.pkg.dev/multi-services-488417/repo-multiservicios/mi-app:v1
         ports:
-        - containerPort: 8080 # El puerto donde escucha tu Node.js
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+        env:
+        - name: DB_HOST
+          value: "10.4.0.3"
+        - name: DB_USER
+          value: "root"
+        - name: DB_PASSWORD
+          value: "tu-password-seguro"
+        - name: DB_NAME
+          value: "db-app-principal"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: mi-app-service
 spec:
-  type: LoadBalancer # Esto te dará una IP pública para entrar desde el navegador
+  type: LoadBalancer
   selector:
     app: mi-app
   ports:
     - protocol: TCP
-      port: 80 # Puerto externo
-      targetPort: 8080 # Puerto interno de la app
-
-
-containers:
-      - name: node-app
-        image: europe-west1-docker.pkg.dev/multi-services-488417/repo-multiservicios/mi-app:v1
-        ports:
-        - containerPort: 8080
-        env:
-        - name: DB_HOST
-          value: "10.4.0.3" # <--- PEGA AQUÍ LA IP QUE COPIASTE
-        - name: DB_USER
-          value: "root"     # O el usuario que hayas creado
-        - name: DB_PASSWORD
-          value: "tu-password-seguro" # El que pusiste en Terraform
-        - name: DB_NAME
-          value: "db-app-principal"
+      port: 80
+      targetPort: 8080
