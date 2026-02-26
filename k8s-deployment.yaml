@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: node-app
-        image: europe-west1-docker.pkg.dev/multi-services-488417/repo-multiservicios/mi-app:v1
+        image: europe-west1-docker.pkg.dev/multi-services-488417/repo-multiservicios/mi-app:v3
         ports:
         - containerPort: 8080
         resources:
