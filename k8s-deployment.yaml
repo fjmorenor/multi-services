@@ -13,25 +13,44 @@ spec:
         app: mi-app
     spec:
       containers:
+      # --- CONTENEDOR 1: APP NODE ---
       - name: node-app
-        image: europe-west1-docker.pkg.dev/multi-services-488417/repo-multiservicios/mi-app:v5
+        image: europe-west1-docker.pkg.dev/multi-services-488417/repo-multiservicios/mi-app:v6
         ports:
         - containerPort: 8080
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "100m"
-          limits:
-            memory: "512Mi"
         env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: "/var/secrets/google/key.json"
         - name: DB_HOST
-          value: "10.4.0.3"
+          value: "127.0.0.1"
         - name: DB_USER
-          value: "root"
+          value: "postgres" # Usuario estándar de Postgres
         - name: DB_PASSWORD
-          value: "tu-password-seguro"
+          value: "TU_CONTRASEÑA_REAL" # Pon la contraseña que cambiaste en la consola
         - name: DB_NAME
           value: "db-app-principal"
+        volumeMounts:
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+          readOnly: true
+
+      # --- CONTENEDOR 2: PROXY (AJUSTADO A POSTGRES) ---
+      - name: cloud-sql-proxy
+        image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.1
+        args:
+          - "--port=5432" # Puerto de Postgres
+          - "--private-ip"
+          - "multi-services-488417:europe-west1:db-instancia-multiservicio"
+          - "--credentials-file=/var/secrets/google/key.json"
+        volumeMounts:
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+          readOnly: true
+
+      volumes:
+      - name: google-cloud-key
+        secret:
+          secretName: pubsub-key
 ---
 apiVersion: v1
 kind: Service
