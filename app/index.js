@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8080;
 const pubsub = new PubSub({
     projectId: 'multi-services-488417' 
 });
-const topicName = 'topic-eventos-app';
+const topicName = 'projects/multi-services-488417/topics/topic-eventos-app';
 
 // 2. CONFIGURACIÓN DE MYSQL
 const db = mysql.createConnection({
