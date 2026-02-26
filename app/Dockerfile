@@ -1,15 +1,16 @@
 FROM node:18-slim
-# Establecemos el directorio de trabajo
-WORKDIR /usr/src/app
 
-# Copiamos los archivos de dependencias usando el comodín para el lock
-COPY package*.json ./
+# Directorio de trabajo simple
+WORKDIR /app
 
-# Ejecutamos la instalación
-RUN npm install --only=production
-
-# Copiamos el resto de la aplicación
+# Copiamos TODO lo que hay en la carpeta app al contenedor
 COPY . .
 
+# Instalamos sin flags complicados para evitar errores de permisos
+RUN npm install
+
+# Exponemos el puerto que usa tu código
 EXPOSE 8080
-CMD [ "npm", "start" ]
+
+# Comando de arranque
+CMD ["node", "index.js"]
