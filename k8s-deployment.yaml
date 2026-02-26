@@ -31,3 +31,19 @@ spec:
     - protocol: TCP
       port: 80 # Puerto externo
       targetPort: 8080 # Puerto interno de la app
+
+
+containers:
+      - name: node-app
+        image: europe-west1-docker.pkg.dev/multi-services-488417/repo-multiservicios/mi-app:v1
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_HOST
+          value: "10.4.0.3" # <--- PEGA AQUÍ LA IP QUE COPIASTE
+        - name: DB_USER
+          value: "root"     # O el usuario que hayas creado
+        - name: DB_PASSWORD
+          value: "tu-password-seguro" # El que pusiste en Terraform
+        - name: DB_NAME
+          value: "db-app-principal"
