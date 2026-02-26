@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 8080;
 
 // Configuración de Pub/Sub
 const pubsub = new PubSub();
-const topicName = 'topic-eventos-app';
+const topicName = 'db-app-principal';
 
 // Configuración de MySQL (usando las variables de entorno que pusimos en el YAML)
 const db = mysql.createConnection({
