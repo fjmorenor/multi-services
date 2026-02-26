@@ -1,16 +1,16 @@
 FROM node:18-slim
 
-# Directorio de trabajo simple
+# Directorio de trabajo en la raíz del contenedor
 WORKDIR /app
 
-# Copiamos TODO lo que hay en la carpeta app al contenedor
+# Copiamos todo
 COPY . .
 
-# Instalamos sin flags complicados para evitar errores de permisos
-RUN npm install
+# ESTO ES PARA DEPURAR: Nos dirá si el package.json está ahí realmente
+RUN ls -la
 
-# Exponemos el puerto que usa tu código
+# Instalación limpia
+RUN npm install --no-audit --no-fund
+
 EXPOSE 8080
-
-# Comando de arranque
 CMD ["node", "index.js"]
