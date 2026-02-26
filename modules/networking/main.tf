@@ -7,19 +7,20 @@ resource "google_compute_network" "vpc" {
 
 resource "google_compute_subnetwork" "subnet" {
     name = var.subnet_name
-    network = google_compute_network.vpc.self_link
-    ip_cidr_range = var.ip_cidr_range
+    network = google_compute_network.vpc.id
+    ip_cidr_range = "10.0.0.0/24"
     project = var.project_id
     region = var.region
+    
 
 secondary_ip_range {
   range_name = var.pods_range_name
-  ip_cidr_range = var.pods_ip_cidr_range
+  ip_cidr_range = "10.1.0.0/16"
   }
 
   secondary_ip_range {
     range_name = var.services_range_name
-    ip_cidr_range = var.services_ip_cidr_range
+    ip_cidr_range = "10.2.0.0/20"
   }
     
 }
@@ -52,4 +53,20 @@ resource "google_compute_firewall" "firewall" {
       protocol = "icmp"
     }
     
+}
+
+resource "google_compute_global_address" "private_ip_address" {
+  name = "google-managed-services-vpc"
+  purpose = "VPC_PEERING"
+  address_type = "INTERNAL"
+  prefix_length = 16
+  network = google_compute_network.vpc.id
+  
+}
+
+resource "google_service_networking_connection" "private_vpc_connection" {
+  network = google_compute_network.vpc.id
+  reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
+  service = "servicenetworking.googleapis.com"
+  
 }

@@ -5,7 +5,8 @@ for_each =toset( [
     "sqladmin.googleapis.com",
     "pubsub.googleapis.com",
     "artifactregistry.googleapis.com",
-    "cloudresourcemanager.googleapis.com"
+    "cloudresourcemanager.googleapis.com",
+    "servicenetworking.googleapis.com"
     ])
 
 project =var.project_id
