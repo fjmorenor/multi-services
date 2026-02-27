@@ -1,6 +1,7 @@
 #provider
 project_id = "multi-services-488417"
 region = "europe-west1"
+zone = "europe-west1-b"
 
 #network
 network_name = "red-multiservicios"

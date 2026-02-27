@@ -38,3 +38,14 @@ module "database" {
 
       
 }
+
+module "monitoring" {
+  source          = "./modules/monitoring"
+  project_id      = var.project_id
+  region          = var.region
+  zone = var.zone
+   # A la izquierda: el nombre de la variable DENTRO del módulo
+  # A la derecha: el valor que viene del módulo de red
+  network_name    = module.networking.network_name    
+  subnetwork_name = module.networking.subnet_name 
+}

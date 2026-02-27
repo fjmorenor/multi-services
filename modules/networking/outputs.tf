@@ -1,9 +1,9 @@
-output "vpc_name" {
-  value = google_compute_network.vpc.name
+output "network_name" {
+  value = google_compute_network.vpc.name # Antes tenías vpc_network
 }
 
 output "subnet_name" {
-  value = google_compute_subnetwork.subnet.name
+  value = google_compute_subnetwork.subnet.name # Antes tenías vpc_subnetwork
 }
 
 output "pods_range_name" {

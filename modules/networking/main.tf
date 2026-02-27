@@ -43,7 +43,8 @@ resource "google_compute_router_nat" "nat" {
 resource "google_compute_firewall" "firewall" {
     name = "firewall"
     network = google_compute_network.vpc.name
-    source_ranges = [ "130.211.0.0/22", "35.191.0.0/16" ]
+    source_ranges = [ "130.211.0.0/22", "35.191.0.0/16","79.117.251.93" ]
+    target_tags = [ "grafana-server" ]
     project = var.project_id
     allow {
       protocol = "tcp"
@@ -51,6 +52,11 @@ resource "google_compute_firewall" "firewall" {
     }
     allow {
       protocol = "icmp"
+    }
+
+    allow {
+      protocol = "tcp"
+      ports = [ "3000" ]
     }
     
 }
