@@ -1,6 +1,7 @@
 resource "google_compute_address" "static_ip_grafana" {
     name = "ipv4-estatica-grafana"
     region = var.region
+    
     }
 
 resource "google_compute_instance" "grafana_vm" {
@@ -8,7 +9,7 @@ resource "google_compute_instance" "grafana_vm" {
     name = "instancia-grafana"
     
     zone = var.zone
-    tags = [ "grafana-server" ]
+    tags = ["grafana-server"]
 
     boot_disk {
         initialize_params {

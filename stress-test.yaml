@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: generador-de-caos
+spec:
+  parallelism: 15 # Lanzará 3 pods a la vez
+  template:
+    spec:
+      containers:
+      - name: stress-ng
+        image: alexeiled/stress-ng
+        # Le pedimos a Autopilot recursos reales para que se noten
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+        args:
+          - "--cpu"
+          - "1"         # Usa 1 worker de CPU
+          - "--timeout"
+          - "200s"      # Durará 5 minutos
+      restartPolicy: Never

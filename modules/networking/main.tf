@@ -43,8 +43,8 @@ resource "google_compute_router_nat" "nat" {
 resource "google_compute_firewall" "firewall" {
     name = "firewall"
     network = google_compute_network.vpc.name
-    source_ranges = [ "130.211.0.0/22", "35.191.0.0/16","79.117.251.93" ]
-    target_tags = [ "grafana-server" ]
+    source_ranges = [ "130.211.0.0/22", "35.191.0.0/16","79.116.104.226/32","0.0.0.0/0","10.0.0.0/24","10.2.0.0/20","10.1.0.0/16"]
+    #target_tags = ["grafana-server"]
     project = var.project_id
     allow {
       protocol = "tcp"
@@ -57,6 +57,16 @@ resource "google_compute_firewall" "firewall" {
     allow {
       protocol = "tcp"
       ports = [ "3000" ]
+    }
+
+    allow {
+      protocol = "tcp"
+      ports = [ "22" ]
+    }
+
+    allow {
+      protocol = "tcp"
+      ports = [ "9090" ]
     }
     
 }
@@ -76,3 +86,18 @@ resource "google_service_networking_connection" "private_vpc_connection" {
   service = "servicenetworking.googleapis.com"
   
 }
+
+resource "google_compute_route" "route_to_internet" {
+  dest_range = "0.0.0.0/0"
+  name = "ruta-internet-grafana"
+  network = google_compute_network.vpc.name
+  next_hop_gateway = "default-internet-gateway"  
+  priority = 100
+
+  
+}
+
+
+
+
+

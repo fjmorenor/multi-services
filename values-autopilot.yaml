@@ -1,0 +1,40 @@
+# values-autopilot.yaml
+prometheusOperator:
+  admissionWebhooks:
+    enabled: false # Autopilot no permite ciertos webhooks de validación
+
+prometheus:
+  prometheusSpec:
+    # Autopilot no permite monitorizar el plano de control (etcd, scheduler, etc)
+    serviceMonitorSelectorNilUsesHelmValues: false
+
+# Deshabilitamos los componentes que intentan entrar en kube-system o usar hostPath
+kubeStateMetrics:
+  enabled: true
+
+nodeExporter:
+  enabled: false # IMPORTANTE: NodeExporter no funciona en Autopilot. 
+                 # Google ya ofrece métricas de nodos vía Google Cloud Monitoring.
+
+# Deshabilitamos monitores de componentes internos que gestiona Google
+kubeExporter:
+  enabled: false
+kubeApiServer:
+  enabled: false
+kubelet:
+  enabled: true # El kubelet sí suele dejar leer métricas básicas
+kubeControllerManager:
+  enabled: false
+coreDns:
+  enabled: false
+kubeEtcd:
+  enabled: false
+kubeScheduler:
+  enabled: false
+kubeProxy:
+  enabled: false
+
+# Como ya tienes una instancia de Grafana en una VM, 
+# no necesitas que Helm instale otra dentro del clúster.
+grafana:
+  enabled: false
